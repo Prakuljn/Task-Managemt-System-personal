@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block title %}Employees' Tasks · TaskFlow{%
+endblock %} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Employee's Tasks</h1>
+    <p class="page-subtitle">All tasks across your team</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn--primary" href="/manager/assign_task">Assign Task</a>
+  </div>
+</section>
+
+<div class="card">
+  <div class="card-body">
+    <div class="toolbar">
+
+    </div>
+    <div class="table-responsive">
+      <table class="table table--hover" id="employeesTasksTable">
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Task Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in result %}
+            {% set emp = entry.employee %}
+            {% for t in entry.tasks %}
+            <tr>
+              <td>{{ emp.name }}</td>
+              <td>{{ t.title }}</td>
+              <td>{{ t.status }}</td>
+              <td>
+                <a class="btn btn--small" href="/manager/reassign_task/{{ t.id }}">Reassign</a>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="4" class="muted">No tasks yet</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="/static/js/dashboard.js" defer></script>
+{% endblock %}

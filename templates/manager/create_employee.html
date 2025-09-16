@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block title %}Create Employee · TaskFlow{% endblock
+%} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Create Employee</h1>
+    <p class="page-subtitle">Add a new team member</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="/manager/dashboard">Back</a>
+  </div>
+</section>
+
+<form id="createEmployeeForm" class="card card--form" method="post" action="/manager/create_employee" novalidate>
+  <div class="form-grid two-cols">
+    <div class="form-field">
+      <label for="name">Full name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="John Smith"
+        required
+      />
+      <p class="field-error" data-error-for="name"></p>
+    </div>
+    <div class="form-field">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        placeholder="johnsmith"
+        required
+      />
+      <p class="field-error" data-error-for="username"></p>
+    </div>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="john@company.com"
+        required
+      />
+      <p class="field-error" data-error-for="email"></p>
+    </div>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        minlength="6"
+        required
+      />
+      <p class="field-error" data-error-for="password"></p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Create</button>
+    <a href="/manager/dashboard" class="btn">Cancel</a>
+  </div>
+</form>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

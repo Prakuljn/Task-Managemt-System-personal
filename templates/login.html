@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% block title %}Sign in · TaskFlow{% endblock %} {%
+block content %}
+<section class="auth">
+  <div class="auth-card">
+    <h1 class="auth-title">Welcome back</h1>
+    <p class="auth-subtitle">Sign in to continue managing your tasks</p>
+  <form id="loginForm" method="post" action="/login" novalidate>
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          autocomplete="username"
+          required
+        />
+        <p class="field-error" data-error-for="username"></p>
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          minlength="6"
+          required
+        />
+        <p class="field-error" data-error-for="password"></p>
+      </div>
+    
+      <button type="submit" class="btn btn--primary btn--full">Sign in</button>
+    </form>
+
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

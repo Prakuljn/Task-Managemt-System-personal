@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %}Task History · TaskFlow{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Task History</h1>
+    <p class="page-subtitle">All updates for this task</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="/employee/tasks">Back to tasks</a>
+  </div>
+</section>
+
+<div class="card">
+  <div class="card-body">
+    <ol class="timeline">
+      {% for h in history or [] %}
+      <li class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-head">
+            <span class="badge">{{ h.status_after }}</span>
+            <time datetime="{{ h.timestamp }}">{{ h.timestamp }}</time>
+          </div>
+          <p>Status changed from <b>{{ h.status_before }}</b> to <b>{{ h.status_after }}</b>, hours: {{ h.hours_spent }}</p>
+        </div>
+      </li>
+      {% else %}
+      <li class="timeline-item empty"><p class="muted">No history yet</p></li>
+      {% endfor %}
+    </ol>
+  </div>
+</div>
+{% endblock %}

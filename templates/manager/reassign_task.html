@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block title %}Reassign Task · TaskFlow{% endblock
+%} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Reassign Task</h1>
+    <p class="page-subtitle">Move a task to a different employee</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="/manager/employees_tasks">Back</a>
+  </div>
+</section>
+
+<form id="reassignTaskForm" class="card card--form" method="post" action="/manager/reassign_task/{{ task.id }}" novalidate>
+  <div class="form-grid two-cols">
+    <div class="form-field">
+      <label for="new_employee_id">New employee</label>
+      <select id="new_employee_id" name="new_employee_id" required>
+        <option value="" disabled selected>Select employee</option>
+        {% for e in employees or [] %}
+        <option value="{{ e.id }}">{{ e.name }}</option>
+        {% endfor %}
+      </select>
+      <p class="field-error" data-error-for="new_employee_id"></p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Reassign</button>
+    <a href="/manager/employees_tasks" class="btn">Cancel</a>
+  </div>
+</form>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

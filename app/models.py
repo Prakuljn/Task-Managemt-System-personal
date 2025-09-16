@@ -34,12 +34,12 @@ class User(Base):
     created_by_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationship to track who created this user
-    created_by = relationship(
+    # Relationship for manager/employee (using created_by_id)
+    manager = relationship(
         "User",
         remote_side=[id],
         foreign_keys=[created_by_id],
-        backref="created_users"
+        backref="employees"
     )
 
     tasks_assigned = relationship(

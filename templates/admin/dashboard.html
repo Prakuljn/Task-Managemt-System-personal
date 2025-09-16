@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block title %}Admin Dashboard · TaskFlow{% endblock
+%} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Admin Dashboard</h1>
+    <p class="page-subtitle">
+      Overview of managers, employees, and task activity
+    </p>
+  </div>
+  <div class="actions">
+    <a class="btn btn--primary" href="/admin/create_manager">Create Manager</a>
+    <a class="btn btn--ghost" href="/admin/managers">View Managers</a>
+  </div>
+</section>
+
+<section class="grid cards-4">
+  <article class="card metric">
+    <h3>Total Managers</h3>
+    <p class="metric-value">{{ total_managers or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Total Employees</h3>
+    <p class="metric-value">{{ total_employees or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Active Tasks</h3>
+    <p class="metric-value">{{ active_tasks or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Completed Tasks</h3>
+    <p class="metric-value">{{ completed_tasks or 0 }}</p>
+  </article>
+</section>
+
+<section class="grid two-cols gap-lg">
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Recent Managers</h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Employees</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for m in managers or [] %}
+            <tr>
+              <td>{{ m.name }}</td>
+              <td>{{ m.username }}</td>
+              <td>{{ m.email }}</td>
+              <td>{{ m.employees_count }}</td>
+              <td>
+                <a class="btn btn--sm" href="/admin/manager/{{ m.id }}">View</a>
+                <form method="post" action="/admin/manager/{{ m.id }}/remove" style="display:inline;">
+                  <button type="submit" class="btn btn--sm btn--danger" onclick="return confirm('Are you sure you want to remove this manager?');">Remove</button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="4" class="muted">No managers yet</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script src="/static/js/dashboard.js" defer></script>
+{% endblock %}

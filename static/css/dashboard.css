@@ -1,0 +1,52 @@
+/* TaskFlow – Dashboard specific styles */
+canvas {
+  width: 100%;
+  max-width: 100%;
+  height: 240px;
+  display: block;
+}
+
+.cards-4 .card.metric {
+  text-align: left;
+  background:
+    radial-gradient(
+      1200px 400px at -20% -40%,
+      rgba(109, 92, 255, 0.12),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.01)
+    );
+}
+
+.table .status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Simple status dots */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-dot.success {
+  background: #16a34a;
+  border: 1.5px solid #22c55e;
+}
+.status-dot.warning {
+  background: #d97706;
+  border: 1.5px solid #f59e0b;
+}
+.status-dot.danger {
+  background: #b91c1c;
+  border: 1.5px solid #ef4444;
+}
+.status-dot.neutral {
+  background: #64748b;
+  border: 1.5px solid #93a0b5;
+}

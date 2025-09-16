@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block title %}Managers · TaskFlow{% endblock %} {%
+block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Managers</h1>
+    <p class="page-subtitle">Browse and manage all managers</p>
+  </div>
+  <div class="actions">
+  <a class="btn btn--primary" href="/admin/create_manager">Create Manager</a>
+  </div>
+</section>
+
+<div class="card">
+  <div class="card-body">
+    <div class="toolbar">
+      <input
+        class="input"
+        type="search"
+        id="searchManagers"
+        placeholder="Search managers..."
+      />
+    </div>
+    <div class="table-responsive">
+      <table class="table table--hover" id="managersTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Employees</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in managers or [] %}
+          <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.username }}</td>
+            <td>{{ m.email }}</td>
+            <td>{{ m.employees_count }}</td>
+            <td class="actions-cell">
+              <a class="btn btn--sm" href="/admin/manager/{{ m.id }}">View</a>
+              <form method="post" action="/admin/manager/{{ m.id }}/remove" style="display:inline;">
+                <button type="submit" class="btn btn--sm btn--danger" onclick="return confirm('Are you sure you want to remove this manager?');">Remove</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="4" class="muted">No managers to show</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="/static/js/dashboard.js" defer></script>
+{% endblock %}

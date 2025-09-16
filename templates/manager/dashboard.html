@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block title %}Manager Dashboard · TaskFlow{%
+endblock %} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Manager Dashboard</h1>
+    <p class="page-subtitle">Track team performance and manage tasks</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn--primary" href="/manager/create_employee"
+      >Create Employee</a
+    >
+    <a class="btn" href="/manager/assign_task">Assign Task</a>
+  </div>
+</section>
+
+<section class="grid cards-4">
+  <article class="card metric">
+    <h3>My Employees</h3>
+    <p class="metric-value">{{ employees_count or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Assigned Tasks</h3>
+    <p class="metric-value">{{ assigned_tasks or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Awaiting Review</h3>
+    <p class="metric-value">{{ awaiting_review or 0 }}</p>
+  </article>
+  <article class="card metric">
+    <h3>Completed</h3>
+    <p class="metric-value">{{ completed or 0 }}</p>
+  </article>
+</section>
+
+<section class="grid two-cols gap-lg">
+
+  <div class="card">
+    <div class="card-header"><h3>Recent Tasks</h3></div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table--hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Employee</th>
+              <th>Due</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in recent_tasks or [] %}
+            <tr>
+              <td>{{ t.title }}</td>
+              <td>{{ t.employee_name }}</td>
+              <td>{{ t.due_date }}</td>
+              <td>
+                <span
+                  class="badge {{ 'success' if t.status=='Completed' else ('warning' if t.status=='In Progress' else 'neutral') }}"
+                  >{{ t.status }}</span
+                >
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="4" class="muted">No recent tasks</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+<script src="/static/js/dashboard.js" defer></script>
+{% endblock %}

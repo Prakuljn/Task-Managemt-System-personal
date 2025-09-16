@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %}Create Manager · TaskFlow{% endblock
+%} {% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Create Manager</h1>
+    <p class="page-subtitle">Add a new manager to the organization</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn--ghost" href="/admin/managers">Back to list</a>
+  </div>
+</section>
+
+<form id="createManagerForm" class="card card--form" method="post" action="/admin/create_manager" novalidate>
+  <div class="form-grid two-cols">
+    <div class="form-field">
+      <label for="name">Full name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="Jane Doe"
+        required
+      />
+      <p class="field-error" data-error-for="name"></p>
+    </div>
+    <div class="form-field">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        placeholder="janedoe"
+        required
+      />
+      <p class="field-error" data-error-for="username"></p>
+    </div>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="jane@company.com"
+        required
+      />
+      <p class="field-error" data-error-for="email"></p>
+    </div>
+  <!-- Phone field removed to match backend -->
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        minlength="6"
+        required
+      />
+      <p class="field-error" data-error-for="password"></p>
+    </div>
+  <!-- Confirm password field removed to match backend -->
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Create</button>
+    <a href="/admin/managers" class="btn">Cancel</a>
+  </div>
+</form>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

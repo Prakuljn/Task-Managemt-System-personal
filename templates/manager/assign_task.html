@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block title %}Assign Task · TaskFlow{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Assign Task</h1>
+    <p class="page-subtitle">Assign a new task to an employee</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="/manager/employees_tasks">View All Tasks</a>
+  </div>
+</section>
+
+<form id="assignTaskForm" class="card card--form" method="post" action="/manager/assign_task" novalidate>
+  <div class="form-grid two-cols">
+    <div class="form-field">
+      <label for="assigned_to_id">Employee</label>
+      <select id="assigned_to_id" name="assigned_to_id" required>
+        <option value="" disabled selected>Select employee</option>
+        {% for e in employees or [] %}
+        <option value="{{ e.id }}">{{ e.name }}</option>
+        {% endfor %}
+      </select>
+      <p class="field-error" data-error-for="assigned_to_id"></p>
+    </div>
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="Design spec review"
+        required
+      />
+      <p class="field-error" data-error-for="title"></p>
+    </div>
+    <div class="form-field span-2">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="5"
+        placeholder="Add details that help the employee deliver successfully"
+        required
+      ></textarea>
+      <p class="field-error" data-error-for="description"></p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Assign</button>
+    <a href="/manager/dashboard" class="btn">Cancel</a>
+  </div>
+</form>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

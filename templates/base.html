@@ -1,33 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title if title else "Task Management" }}</title>
-  <link rel="stylesheet" href="/static/css/style.css">
-  {% block extra_css %}{% endblock %}
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="/">Home</a>
-    <a href="/admin/dashboard">Admin</a>
-    <a href="/manager/dashboard">Manager</a>
-    <a href="/employee/tasks">Employee</a>
-    <a href="/logout" class="logout">Logout</a>
-  </nav>
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}Task Management{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+    {% block head_extra %}{% endblock %}
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container header-inner">
+        <a class="brand" href="/login" aria-label="Task Management home">
+      
+          <span class="brand-name">Task Management System</span>
+        </a>
 
-  <!-- Main Page Content -->
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+          
+        <nav class="site-nav" id="siteNav" aria-label="Primary">
+          <form method="post" action="/logout" style="display:inline; margin-left: 1rem;">
+            <button type="submit" class="btn btn--sm btn--danger">Logout</button>
+          </form>
+        </nav>
+      </div>
+    </header>
 
-  <!-- Footer -->
-  <footer>
-    <p>Task Management © 2025</p>
-  </footer>
+    <main class="app-main container">{% block content %}{% endblock %}</main>
 
-  <script src="/static/js/main.js"></script>
-  {% block extra_js %}{% endblock %}
-</body>
+  
+
+    <script src="/static/js/main.js" defer></script>
+    {% block scripts %}{% endblock %}
+  </body>
 </html>

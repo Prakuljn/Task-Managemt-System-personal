@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %}Update Task · TaskFlow{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">Update Task</h1>
+    <p class="page-subtitle">Provide status updates and progress</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="/employee/tasks">Back</a>
+  </div>
+</section>
+
+<form id="updateTaskForm" class="card card--form" method="post" novalidate>
+  <div class="form-grid two-cols">
+    <div class="form-field">
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        {% for s in statuses %}
+        <option value="{{ s.value }}" {% if task.status == s.value %}selected{% endif %}>{{ s.value|capitalize }}</option>
+        {% endfor %}
+      </select>
+      <p class="field-error" data-error-for="status"></p>
+    </div>
+    <div class="form-field">
+      <label for="hours_spent">Hours Spent</label>
+      <input
+        id="hours_spent"
+        name="hours_spent"
+        type="number"
+        min="0"
+        step="0.1"
+        value="{{ task.hours_spent if task else 0 }}"
+        required
+      />
+      <p class="field-error" data-error-for="hours_spent"></p>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">Submit update</button>
+    <a href="/employee/task_history/{{ task.id if task else '' }}" class="btn">View history</a>
+  </div>
+</form>
+{% endblock %} {% block scripts %}
+<script src="/static/js/form_validation.js" defer></script>
+{% endblock %}

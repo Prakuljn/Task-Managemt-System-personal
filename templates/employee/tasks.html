@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block title %}My Tasks · TaskFlow{% endblock %} {%
+block content %}
+<section class="page-header">
+  <div>
+    <h1 class="page-title">My Tasks</h1>
+    <p class="page-subtitle">View and update your assigned tasks</p>
+  </div>
+</section>
+
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table--hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Hours Spent</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in tasks or [] %}
+          <tr>
+            <td>{{ t.title }}</td>
+            <td>{{ t.status }}</td>
+            <td>{{ t.hours_spent }}</td>
+            <td class="actions-cell">
+              <a class="btn btn--sm" href="/employee/update_task/{{ t.id }}">Update</a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="4" class="muted">No tasks assigned</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
